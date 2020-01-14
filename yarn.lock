@@ -896,10 +896,10 @@ metascraper-publisher@^5.9.5:
   dependencies:
     "@metascraper/helpers" "^5.9.5"
 
-metascraper-readerable@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/metascraper-readerable/-/metascraper-readerable-1.0.0.tgz#b3d566da1a6ad84118231aa0c01a02bf0f79447d"
-  integrity sha512-y1U2MATZ2DccoDNqUYYQiXqD8Ra61luIeHW3K70I3AjVrQfgexikE4mqJSCfMRLBYAZWZBod6MQx+lESMcfLEw==
+metascraper-readerable@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/metascraper-readerable/-/metascraper-readerable-1.0.2.tgz#9e083d4e0b23f72c69e2a8aadc2dd579ae14b2a4"
+  integrity sha512-K1HGfZTUXJfsTXV+HQFKtLtQi4NIEr3w9gqWoqsIKV/oY1tsmFPDFlSoi/9NOvKC7h3al1ORzwI/UywVOc+0fg==
   dependencies:
     "@metascraper/helpers" "^5.9.5"
     jsdom "~16.0.0"

@@ -16,9 +16,7 @@ const metascraperReaderable = require("metascraper")([
 
 const got = require("got");
 
-const validateParams = event => {
-  const { queryStringParameters: params } = event;
-
+const validateParams = params => {
   return params && params.url;
 };
 
@@ -33,7 +31,9 @@ const urlMissingError = {
 };
 
 module.exports.getURLMetadata = async event => {
-  if (!validateParams(event)) {
+  const { queryStringParameters: params } = event;
+
+  if (!validateParams(params)) {
     return urlMissingError;
   }
 
@@ -55,7 +55,9 @@ module.exports.getURLMetadata = async event => {
 };
 
 module.exports.getURLReaderable = async event => {
-  if (!validateParams(event)) {
+  const { queryStringParameters: params } = event;
+
+  if (!validateParams(params)) {
     return urlMissingError;
   }
 
