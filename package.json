@@ -4,5 +4,17 @@
   "description": "URL metadata",
   "main": "index.js",
   "author": "Are.na",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "got": "^10.2.2",
+    "metascraper": "^5.9.5",
+    "metascraper-author": "^5.9.5",
+    "metascraper-date": "^5.9.5",
+    "metascraper-description": "^5.9.5",
+    "metascraper-image": "^5.9.5",
+    "metascraper-logo": "^5.9.5",
+    "metascraper-publisher": "^5.9.5",
+    "metascraper-title": "^5.9.5",
+    "metascraper-url": "^5.9.5"
+  }
 }
