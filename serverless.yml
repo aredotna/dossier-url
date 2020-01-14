@@ -1,0 +1,23 @@
+org: aredotna
+app: dossier-url
+service: dossier-url
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+functions:
+  URLReaderable:
+    handler: index.getURLReaderable
+    events:
+      - http:
+          path: readerable
+          method: get
+          cors: true
+  URLMetadata:
+    handler: index.getURLMetadata
+    events:
+      - http:
+          path: metadata
+          method: get
+          cors: true
