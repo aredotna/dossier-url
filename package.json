@@ -1,0 +1,8 @@
+{
+  "name": "dossier",
+  "version": "1.0.0",
+  "description": "URL metadata",
+  "main": "index.js",
+  "author": "Are.na",
+  "license": "MIT"
+}
