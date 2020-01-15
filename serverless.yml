@@ -7,6 +7,13 @@ provider:
   runtime: nodejs12.x
 
 functions:
+  URLScreenshot:
+    handler: screenshot.getURLScreenshot
+    events:
+      - http:
+          path: screenshot
+          method: get
+          cors: true
   URLMetadata:
     handler: index.getURLMetadata
     events:

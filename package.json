@@ -6,6 +6,8 @@
   "author": "Are.na",
   "license": "MIT",
   "dependencies": {
+    "browserless": "^5.19.13",
+    "chrome-aws-lambda": "^2.0.2",
     "got": "^10.2.2",
     "metascraper": "^5.9.5",
     "metascraper-author": "^5.9.5",
@@ -17,6 +19,7 @@
     "metascraper-publisher": "^5.9.5",
     "metascraper-readerable": "1.0.2",
     "metascraper-title": "^5.9.5",
-    "metascraper-url": "^5.9.5"
+    "metascraper-url": "^5.9.5",
+    "puppeteer": "^2.0.0"
   }
 }
