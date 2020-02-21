@@ -4,8 +4,6 @@ const AWS = require("aws-sdk"); // eslint-disable-line import/no-extraneous-depe
 
 const s3 = new AWS.S3();
 
-process.env.AWS_LAMBDA_FUNCTION_NAME = true;
-
 const validateParams = params => {
   return params && params.url;
 };
