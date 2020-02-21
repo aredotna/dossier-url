@@ -18,6 +18,7 @@ package:
 
 plugins:
   - serverless-plugin-include-dependencies
+  - serverless-dotenv-plugin
 
 provider:
   name: aws
@@ -39,6 +40,7 @@ functions:
 
     environment:
       BUCKET: ${self:custom.bucket}
+      TOKEN: ${env:DOSSIER_TOKEN}
     events:
       - http:
           path: screenshot

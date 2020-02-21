@@ -4,7 +4,11 @@ const AWS = require("aws-sdk"); // eslint-disable-line import/no-extraneous-depe
 
 const s3 = new AWS.S3();
 
-const validateParams = params => {
+const validateParams = (params, headers) => {
+  if (!headers || headers["X-AUTH-TOKEN"] !== process.env.DOSSIER_TOKEN) {
+    return false;
+  }
+
   return params && params.url;
 };
 
@@ -14,14 +18,16 @@ const urlMissingError = {
     "Access-Control-Allow-Origin": "*"
   },
   body: JSON.stringify({
-    error: "You must pass a url as a parameter (i.e. ?url=https://are.na)"
+    error:
+      "You must pass a url as a parameter (i.e. ?url=https://are.na) and your token in the X-AUTH-TOKEN header"
   })
 };
 
 module.exports.getURLScreenshot = async event => {
-  const { queryStringParameters: params } = event;
+  const { queryStringParameters: params, headers } = event;
+  console.log("event", event);
 
-  if (!validateParams(params)) {
+  if (!validateParams(params, headers)) {
     return urlMissingError;
   }
 

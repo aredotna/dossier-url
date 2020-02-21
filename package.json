@@ -31,6 +31,7 @@
     "utf-8-validate": "^5.0.2"
   },
   "devDependencies": {
+    "serverless-dotenv-plugin": "^2.3.2",
     "serverless-plugin-common-excludes": "^3.0.0"
   }
 }
