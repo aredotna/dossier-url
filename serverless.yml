@@ -2,13 +2,43 @@ org: aredotna
 app: dossier-url
 service: dossier-url
 
+custom:
+  bucket: arena-dossier
+  bundle:
+    caching: false
+    packagerOptions:
+      scripts:
+        - rm -rf node_modules/sharp && npm install --arch=x64 --platform=linux --target=10.15.0 sharp
+
+package:
+  individually: true
+  includeDependencies:
+    always:
+      - "node_modules/chrome-aws-lambda/bin/**"
+
+plugins:
+  - serverless-plugin-include-dependencies
+
 provider:
   name: aws
-  runtime: nodejs12.x
+  runtime: nodejs10.x
+  memorySize: 2536
+  timeout: 120
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:PutObjectAcl
+      Resource: "arn:aws:s3:::${self:custom.bucket}/*"
 
 functions:
   URLScreenshot:
     handler: screenshot.getURLScreenshot
+    timeout: 120
+    layers:
+
+    environment:
+      BUCKET: ${self:custom.bucket}
     events:
       - http:
           path: screenshot

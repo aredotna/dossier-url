@@ -6,8 +6,12 @@
   "author": "Are.na",
   "license": "MIT",
   "dependencies": {
+    "@browserless/screenshot": "^5.19.9",
+    "aws-sdk": "^2.622.0",
     "browserless": "^5.19.13",
-    "chrome-aws-lambda": "^2.0.2",
+    "bufferutil": "^4.0.1",
+    "canvas": "^2.6.1",
+    "chrome-aws-lambda": "^2.1.1",
     "got": "^10.2.2",
     "metascraper": "^5.9.5",
     "metascraper-author": "^5.9.5",
@@ -20,6 +24,13 @@
     "metascraper-readerable": "1.0.2",
     "metascraper-title": "^5.9.5",
     "metascraper-url": "^5.9.5",
-    "puppeteer": "^2.0.0"
+    "puppeteer": "^2.1.1",
+    "puppeteer-core": "^2.1.1",
+    "serverless-plugin-include-dependencies": "^4.0.1",
+    "sharp": "^0.24.1",
+    "utf-8-validate": "^5.0.2"
+  },
+  "devDependencies": {
+    "serverless-plugin-common-excludes": "^3.0.0"
   }
 }
