@@ -67,8 +67,6 @@ functions:
   URLScreenshot:
     handler: screenshot.getURLScreenshot
     timeout: 120
-    layers:
-
     environment:
       BUCKET: ${self:custom.bucket}
       TOKEN: ${env:DOSSIER_TOKEN}
