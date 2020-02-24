@@ -1,11 +1,8 @@
 const chromium = require("chrome-aws-lambda");
 const browserless = require("browserless");
-const AWS = require("aws-sdk"); // eslint-disable-line import/no-extraneous-dependencies
-
-const s3 = new AWS.S3();
 
 const validateParams = (params, headers) => {
-  if (!headers || headers["X-AUTH-TOKEN"] !== process.env.DOSSIER_TOKEN) {
+  if (!headers || headers["x-auth-token"] !== process.env.DOSSIER_TOKEN) {
     return false;
   }
 
@@ -30,13 +27,13 @@ module.exports.getURLScreenshot = async event => {
   if (!validateParams(params, headers)) {
     return urlMissingError;
   }
-
-  let location = null;
+  let browser = null;
+  let buffer = null;
 
   try {
     let executablePath = await chromium.executablePath;
 
-    const browser = await browserless({
+    browser = await browserless({
       ignoreHTTPSErrors: true,
       timeout: 120000,
       executablePath,
@@ -50,41 +47,28 @@ module.exports.getURLScreenshot = async event => {
     });
 
     console.log("🎆 getting screenshot");
-    const buffer = await browser.screenshot(params.url, {
+    buffer = await browser.screenshot(params.url, {
       waitFor: 200,
       viewport: {
         width: 1280,
         height: 1280
       }
     });
-
-    console.log("⛩ Uploading to S3");
-    const response = await s3
-      .upload({
-        Bucket: process.env.BUCKET,
-        Key: `screenshot-${new Date().getTime()}.png`,
-        Body: buffer,
-        ACL: "public-read",
-        ContentType: "image/png"
-      })
-      .promise();
-
-    console.log("🌌 response", response);
-    location = response.Location;
   } catch (error) {
     console.log("ERRORRRRRR", error);
     return error;
+  } finally {
+    await browser.close();
   }
 
   const response = {
     statusCode: 200,
     headers: {
-      "Access-Control-Allow-Origin": "*"
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "image/png"
     },
-    body: JSON.stringify({
-      url: params.url,
-      location
-    })
+    body: buffer.toString("base64"),
+    isBase64Encoded: true
   };
 
   return response;

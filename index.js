@@ -13,7 +13,11 @@ const metascraper = require("metascraper")([
 
 const got = require("got");
 
-const validateParams = params => {
+const validateParams = (params, headers) => {
+  if (!headers || headers["x-auth-token"] !== process.env.DOSSIER_TOKEN) {
+    return false;
+  }
+
   return params && params.url;
 };
 
@@ -23,7 +27,8 @@ const urlMissingError = {
     "Access-Control-Allow-Origin": "*"
   },
   body: JSON.stringify({
-    error: "You must pass a url as a parameter (i.e. ?url=https://are.na)"
+    error:
+      "You must pass a url as a parameter (i.e. ?url=https://are.na) and your token in the X-AUTH-TOKEN header"
   })
 };
 

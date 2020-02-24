@@ -23,7 +23,7 @@ plugins:
 provider:
   name: aws
   runtime: nodejs10.x
-  memorySize: 2536
+  memorySize: 3008
   timeout: 120
   iamRoleStatements:
     - Effect: Allow
@@ -31,6 +31,37 @@ provider:
         - s3:PutObject
         - s3:PutObjectAcl
       Resource: "arn:aws:s3:::${self:custom.bucket}/*"
+
+resources:
+  Resources:
+    CloudFrontDistribution:
+      Type: AWS::CloudFront::Distribution
+      Properties:
+        DistributionConfig:
+          Comment: CloudFront caching for Dossier (${opt:stage, 'dev'})
+          DefaultCacheBehavior:
+            TargetOriginId: DossierOrigin
+            ViewerProtocolPolicy: "redirect-to-https"
+            DefaultTTL: 86400
+            ForwardedValues:
+              Headers:
+                - x-auth-token
+              QueryString: true
+              QueryStringCacheKeys:
+                - url
+          Enabled: true
+          Origins:
+            - Id: DossierOrigin
+              DomainName:
+                Fn::Join:
+                  - "."
+                  - - Ref: ApiGatewayRestApi
+                    - execute-api.us-east-1.amazonaws.com
+              OriginPath: /${opt:stage, 'dev'}
+              CustomOriginConfig:
+                HTTPPort: 80
+                HTTPSPort: 443
+                OriginProtocolPolicy: https-only
 
 functions:
   URLScreenshot:
