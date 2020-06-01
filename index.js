@@ -33,6 +33,7 @@ const urlMissingError = {
 };
 
 module.exports.getURLMetadata = async (event) => {
+  console.log("➡️ GET URL METATDATA", event);
   const { queryStringParameters: params } = event;
 
   if (!validateParams(params)) {
@@ -40,6 +41,9 @@ module.exports.getURLMetadata = async (event) => {
   }
 
   const { body: html, url } = await got(decodeURIComponent(params.url));
+
+  console.log("got", { html, url });
+
   const metadata = await metascraper({ html, url });
 
   const response = {
