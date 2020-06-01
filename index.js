@@ -8,7 +8,7 @@ const metascraper = require("metascraper")([
   require("metascraper-title")(),
   require("metascraper-url")(),
   require("metascraper-readerable")(),
-  require("metascraper-fulltext")()
+  require("metascraper-fulltext")(),
 ]);
 
 const got = require("got");
@@ -24,15 +24,15 @@ const validateParams = (params, headers) => {
 const urlMissingError = {
   statusCode: 403,
   headers: {
-    "Access-Control-Allow-Origin": "*"
+    "Access-Control-Allow-Origin": "*",
   },
   body: JSON.stringify({
     error:
-      "You must pass a url as a parameter (i.e. ?url=https://are.na) and your token in the X-AUTH-TOKEN header"
-  })
+      "You must pass a url as a parameter (i.e. ?url=https://are.na) and your token in the X-AUTH-TOKEN header",
+  }),
 };
 
-module.exports.getURLMetadata = async event => {
+module.exports.getURLMetadata = async (event) => {
   const { queryStringParameters: params } = event;
 
   if (!validateParams(params)) {
@@ -45,12 +45,12 @@ module.exports.getURLMetadata = async event => {
   const response = {
     statusCode: 200,
     headers: {
-      "Access-Control-Allow-Origin": "*"
+      "Access-Control-Allow-Origin": "*",
     },
     body: JSON.stringify({
       url,
-      metadata
-    })
+      metadata,
+    }),
   };
 
   return response;

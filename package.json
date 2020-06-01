@@ -10,7 +10,6 @@
     "aws-sdk": "^2.622.0",
     "browserless": "^5.19.13",
     "bufferutil": "^4.0.1",
-    "chrome-aws-lambda": "^2.1.1",
     "got": "^10.2.2",
     "metascraper": "^5.9.5",
     "metascraper-author": "^5.9.5",

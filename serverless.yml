@@ -10,12 +10,6 @@ custom:
       scripts:
         - rm -rf node_modules/sharp && npm install --arch=x64 --platform=linux --target=10.15.0 sharp
 
-package:
-  individually: true
-  includeDependencies:
-    always:
-      - "node_modules/chrome-aws-lambda/bin/**"
-
 plugins:
   - serverless-plugin-include-dependencies
   - serverless-dotenv-plugin
@@ -67,6 +61,8 @@ functions:
   URLScreenshot:
     handler: screenshot.getURLScreenshot
     timeout: 120
+    layers:
+      - arn:aws:lambda:us-east-1:583577227413:layer:ChromeAwsLambda:1
     environment:
       BUCKET: ${self:custom.bucket}
       TOKEN: ${env:DOSSIER_TOKEN}
