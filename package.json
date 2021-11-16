@@ -7,7 +7,7 @@
   "license": "MIT",
   "dependencies": {
     "@browserless/screenshot": "^5.19.9",
-    "aws-sdk": "^2.622.0",
+    "aws-sdk": "^2.814.0",
     "browserless": "^5.19.13",
     "bufferutil": "^4.0.1",
     "got": "^10.2.2",
