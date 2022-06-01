@@ -25,7 +25,7 @@
     "puppeteer": "^2.1.1",
     "puppeteer-core": "^2.1.1",
     "serverless-plugin-include-dependencies": "^4.0.1",
-    "sharp": "^0.24.1",
+    "sharp": "^0.30.5",
     "utf-8-validate": "^5.0.2"
   },
   "devDependencies": {
